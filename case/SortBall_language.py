@@ -19,7 +19,7 @@ ST.SNAPSHOT_QUALITY = 90
 
 
 class SortBallLanguage:
-    language = "英语"
+    language = "繁体13promax"
     name = rf"{language}/{language}"
 
     def __init__(self):
@@ -31,7 +31,7 @@ class SortBallLanguage:
         self.ShopPage = ShopPage
 
     def file_path(self, folder_name):
-        path = f"/Users/amber/PycharmProjects/Sortball_副本/case/log/{folder_name}"
+        path = f"/Users/amber/PycharmProjects/Sortball_ios/case/log/{folder_name}"
         if os.path.exists(path):
             return self
         else:
@@ -45,6 +45,7 @@ class SortBallLanguage:
         """
         self.PrivacyPage().first_open()
         filename = "隐私弹窗"
+        self.BaseElement().sleep_time()
         self.BaseElement().get_snapshot(filename, self.name)
         return self
 
@@ -66,6 +67,7 @@ class SortBallLanguage:
         first_step = "新手引导第一步"
         second_step = "新手引导第二步"
         self.PrivacyPage().click_accept()
+        self.BaseElement().sleep_time()
         self.BaseElement().get_snapshot(first_step, self.name)
         self.GamePlayGuide().first_guide_step1()
         self.BaseElement().get_snapshot(second_step, self.name)
@@ -79,12 +81,20 @@ class SortBallLanguage:
         victory = "胜利页面"
         second_guide = "第二关引导文案"
         victory_banner = "胜利横幅页面"
+        game_start_banner = "开局banner"
+        no_withdraw_step = "没有撤回步骤toast"
         self.GamePlayGuide().first_guide_step2()
+        self.BaseElement().sleep_time(1.5)
         self.BaseElement().get_snapshot(victory_banner, self.name)
         self.BaseElement().sleep_time()
         self.BaseElement().get_snapshot(victory, self.name)
         self.GamePage().game_victory()
+        self.BaseElement().sleep_time(1)
+        self.BaseElement().get_snapshot(game_start_banner, self.name)
         self.BaseElement().get_snapshot(second_guide, self.name)
+        self.GamePage().click_withdraw()
+        self.BaseElement().get_snapshot(no_withdraw_step, self.name)
+
         return self
 
     def setting_page(self):
@@ -151,7 +161,7 @@ class SortBallLanguage:
         for i in range(4):
             self.GamePage().debug_win().game_victory()
         self.BaseElement().sleep_time().get_snapshot(reward_page, self.name)
-        self.GamePage().reward_page_use()
+        self.GamePage().reward_page_no_use()
         return self
 
     def shop_page(self):
@@ -192,12 +202,19 @@ class SortBallLanguage:
         self.BaseElement().get_snapshot(no_level_toast, self.name)
         return self
 
+    def no_level_ios(self):
+        no_level_toast = "没有关卡toast"
+        self.ShopPage().shop_back_home()
+        self.HomePage().ios_get_level_3000().home_goto_game()
+        self.GamePage().debug_win().game_victory()
+        self.BaseElement().get_snapshot(no_level_toast, self.name)
+        return self
+
 
 if __name__ == "__main__":
     if not cli_setup():
         auto_setup(__file__, logdir=True, devices=[
-            "android://127.0.0.1:5037/R3CW10C3D9N?cap_method=ADBCAP&", ])
-    SortBallLanguage().file_path("英语").policy_page_android().game_guide(). \
+            "ios:///http://127.0.0.1:8300", ])
+    SortBallLanguage().file_path("繁体13promax").policy_page_ios().game_guide(). \
         victory_page().setting_page().about_ad().scoring_guidance(). \
-        special_pop_up().get_reward().shop_page().no_level()
-    # SortBallLanguage().file_path("英语_12mini").no_level()
+        special_pop_up().get_reward().shop_page().no_level_ios()
