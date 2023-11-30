@@ -234,7 +234,7 @@ class GamePage(BaseElement):
         if exists(self.withdraw_button):
             self.image_click(self.withdraw_button)
         else:
-            self.image_click([956, 233])
+            self.image_click([974, 243])
         return self
 
 

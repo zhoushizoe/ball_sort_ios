@@ -19,7 +19,7 @@ ST.SNAPSHOT_QUALITY = 90
 
 
 class SortBallLanguage:
-    language = "繁体13promax"
+    language = "越南语iphone"
     name = rf"{language}/{language}"
 
     def __init__(self):
@@ -215,6 +215,6 @@ if __name__ == "__main__":
     if not cli_setup():
         auto_setup(__file__, logdir=True, devices=[
             "ios:///http://127.0.0.1:8300", ])
-    SortBallLanguage().file_path("繁体13promax").policy_page_ios().game_guide(). \
+    SortBallLanguage().file_path("越南语iphone").policy_page_ios().game_guide(). \
         victory_page().setting_page().about_ad().scoring_guidance(). \
         special_pop_up().get_reward().shop_page().no_level_ios()

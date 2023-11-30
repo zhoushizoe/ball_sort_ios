@@ -14,7 +14,7 @@ class PrivacyPage(BaseElement, SortBallApp):
     ballsort_ios_package = "ios.game.ballsort.inner"
     package_name = "BallSort"
 
-    ballsort_ios_install = r"/Users/amber/Downloads/BallSort_IOS_1040_1.ipa"
+    ballsort_ios_install = r"/Users/amber/Downloads/BallSort_IOS_1040_2.ipa"
     system_notifications_button = Template(r"../picture/privacy_page/system_notifications_button.png",
                                            record_pos=(0.001, 0.447), resolution=(1440, 3088))
     accept_button = Template(r"../picture/privacy_page/accept_button.png", target_pos=6, record_pos=(-0.256, 0.194),

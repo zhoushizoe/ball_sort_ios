@@ -46,7 +46,7 @@ class HomePage(BaseElement):
         self.sleep_time(1)
         self.image_click([315, 1948])
         self.image_click([1223, 1979], times=3)
-        self.image_click([814, 1797])
+        self.image_click([619, 1098])
         return self
 
     def home_goto_game(self):
